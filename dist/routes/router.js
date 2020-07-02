@@ -62,13 +62,15 @@ router.get('/usuarios/detalle', (req, res) => {
         clientes: sockets_1.usuariosConectdos.getLista()
     });
 });
-router.get('/new-whatsapp', (req, res) => {
+router.post('/new-whatsapp', (req, res) => {
     const ticket = req.body.ticket;
     const server = server_1.default.instance;
-    server.io.emit('nuevo-whatsapp', {
+    const payload = {
         ok: true,
         mensaje: 'Nuevo Mensaje de Whatsapp',
         ticket
-    });
+    };
+    server.io.emit('nuevo-whatsapp', payload);
+    res.json(payload);
 });
 exports.default = router;
