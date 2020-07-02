@@ -4,8 +4,8 @@ exports.Usuario = void 0;
 class Usuario {
     constructor(id) {
         this.id = id;
-        this.nombre = 'Sin Nombre';
-        this.sala = 'sin-sala';
+        this.nombre = 'Unknown';
+        this.sala = 'Unknown';
     }
 }
 exports.Usuario = Usuario;

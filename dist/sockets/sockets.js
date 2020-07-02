@@ -4,14 +4,16 @@ exports.login = exports.whatsapp = exports.mensaje = exports.desconectar = expor
 const usuarios_lista_1 = require("../classes/usuarios-lista");
 const usuario_1 = require("../classes/usuario");
 exports.usuariosConectdos = new usuarios_lista_1.UsuariosLista();
-exports.conectarCliente = (cliente) => {
+exports.conectarCliente = (cliente, io) => {
     const usuario = new usuario_1.Usuario(cliente.id);
     exports.usuariosConectdos.agregar(usuario);
+    io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
 };
-exports.desconectar = (cliente) => {
+exports.desconectar = (cliente, io) => {
     cliente.on('disconnect', () => {
         const desconectado = exports.usuariosConectdos.borrarUsuario(cliente.id);
         console.log('Cliente desconectado: ', desconectado);
+        io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
     });
 };
 // Escuchar mensajes
@@ -37,6 +39,6 @@ exports.login = (cliente, io) => {
             ok: true,
             mensaje: `Usuario ${payload.nombre} configurado`
         });
-        // io.emit('New-whatsapp', payload )
+        io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
     });
 };

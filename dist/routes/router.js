@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const server_1 = __importDefault(require("../classes/server"));
+const sockets_1 = require("../sockets/sockets");
 const router = express_1.Router();
 router.get('/mensajes', (req, res) => {
     res.json({
@@ -37,6 +38,37 @@ router.post('/mensajes/:id', (req, res) => {
         cuerpo,
         de,
         id
+    });
+});
+// Obtener ids de usuarios
+router.get('/usuarios', (req, res) => {
+    const server = server_1.default.instance;
+    server.io.clients((err, clientes) => {
+        if (err) {
+            return res.json({
+                ok: false,
+                err
+            });
+        }
+        res.json({
+            ok: true,
+            clientes
+        });
+    });
+});
+router.get('/usuarios/detalle', (req, res) => {
+    res.json({
+        ok: true,
+        clientes: sockets_1.usuariosConectdos.getLista()
+    });
+});
+router.get('/new-whatsapp', (req, res) => {
+    const ticket = req.body.ticket;
+    const server = server_1.default.instance;
+    server.io.emit('nuevo-whatsapp', {
+        ok: true,
+        mensaje: 'Nuevo Mensaje de Whatsapp',
+        ticket
     });
 });
 exports.default = router;

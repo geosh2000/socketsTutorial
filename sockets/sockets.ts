@@ -8,20 +8,24 @@ import { Usuario } from '../classes/usuario';
 export const usuariosConectdos = new UsuariosLista(); 
 
 
-export const conectarCliente = ( cliente: Socket) => {
+export const conectarCliente = ( cliente: Socket, io: socketIO.Server) => {
 
     const usuario = new Usuario( cliente.id );
     usuariosConectdos.agregar( usuario );
+
+    io.emit( 'usuarios-activos', usuariosConectdos.getLista() );
 
 
 }
 
 
-export const desconectar = ( cliente: Socket) => {
+export const desconectar = ( cliente: Socket, io: socketIO.Server) => {
 
     cliente.on('disconnect', () => {
         const desconectado = usuariosConectdos.borrarUsuario( cliente.id );
         console.log('Cliente desconectado: ', desconectado);
+
+        io.emit( 'usuarios-activos', usuariosConectdos.getLista() );
     })
 
 }
@@ -69,8 +73,10 @@ export const login = ( cliente: Socket, io: socketIO.Server ) => {
             mensaje: `Usuario ${ payload.nombre } configurado` 
         })
 
-        // io.emit('New-whatsapp', payload )
+        io.emit( 'usuarios-activos', usuariosConectdos.getLista() );
 
     });
 
-} 
+}
+
+ 

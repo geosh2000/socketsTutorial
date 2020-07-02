@@ -43,11 +43,11 @@ class Server {
         this.io.on('connection', cliente => {
             console.log('Cliente conectado: ', cliente.id);
             // Conectar cliente
-            socket.conectarCliente(cliente);
+            socket.conectarCliente(cliente, this.io);
             // Configurar Usuario
             socket.login(cliente, this.io);
             // Desconectar
-            socket.desconectar(cliente);
+            socket.desconectar(cliente, this.io);
             // Mensajes
             socket.mensaje(cliente, this.io);
             // Whatsapp
