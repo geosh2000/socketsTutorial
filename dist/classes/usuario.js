@@ -5,6 +5,7 @@ class Usuario {
     constructor(id) {
         this.id = id;
         this.nombre = 'Unknown';
+        this.activeTicket = 'Unknown';
         this.sala = 'Unknown';
     }
 }

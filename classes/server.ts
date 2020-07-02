@@ -58,6 +58,9 @@ export default class Server {
                         
             // Whatsapp
             socket.whatsapp( cliente, this.io );  
+                        
+            // SetTicket
+            socket.activeTicket( cliente, this.io );  
 
         }) 
 

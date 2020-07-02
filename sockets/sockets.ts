@@ -79,4 +79,24 @@ export const login = ( cliente: Socket, io: socketIO.Server ) => {
 
 }
 
+// Configurar Ticket
+export const activeTicket = ( cliente: Socket, io: socketIO.Server ) => {
+
+    cliente.on('activar-ticket', ( payload: { ticket: any }, callback: Function ) => {
+
+        usuariosConectdos.actualizarActiveTicket( cliente.id, payload.ticket )
+
+        console.log( 'Usuario Configurado', usuariosConectdos.getUsuario( cliente.id ) );
+
+        callback({
+            ok: true,
+            mensaje: `Usuario ${ cliente.id } viendo ${ payload.ticket }` 
+        })
+
+        io.emit( 'usuarios-activos', usuariosConectdos.getLista() );
+
+    });
+
+}
+
  

@@ -33,6 +33,19 @@ export class UsuariosLista {
 
     }
 
+    public actualizarActiveTicket( id: string, ticket: string ) {
+        
+        for( let usuario of this.lista ){
+
+            if( usuario.id === id ){
+                usuario.activeTicket = ticket;
+                break;
+            }
+
+        }
+
+    }
+
     public getLista() {
         return this.lista;
     }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.whatsapp = exports.mensaje = exports.desconectar = exports.conectarCliente = exports.usuariosConectdos = void 0;
+exports.activeTicket = exports.login = exports.whatsapp = exports.mensaje = exports.desconectar = exports.conectarCliente = exports.usuariosConectdos = void 0;
 const usuarios_lista_1 = require("../classes/usuarios-lista");
 const usuario_1 = require("../classes/usuario");
 exports.usuariosConectdos = new usuarios_lista_1.UsuariosLista();
@@ -38,6 +38,18 @@ exports.login = (cliente, io) => {
         callback({
             ok: true,
             mensaje: `Usuario ${payload.nombre} configurado`
+        });
+        io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
+    });
+};
+// Configurar Ticket
+exports.activeTicket = (cliente, io) => {
+    cliente.on('activar-ticket', (payload, callback) => {
+        exports.usuariosConectdos.actualizarActiveTicket(cliente.id, payload.ticket);
+        console.log('Usuario Configurado', exports.usuariosConectdos.getUsuario(cliente.id));
+        callback({
+            ok: true,
+            mensaje: `Usuario ${cliente.id} viendo ${payload.ticket}`
         });
         io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
     });

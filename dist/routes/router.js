@@ -73,6 +73,7 @@ router.post('/new-whatsapp', (req, res) => {
         data
     };
     server.io.emit('nuevo-whatsapp', payload);
+    server.io.emit(payload['ticket'], { ok: true });
     res.json(payload);
 });
 exports.default = router;

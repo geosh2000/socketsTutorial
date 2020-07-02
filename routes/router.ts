@@ -108,6 +108,7 @@ router.post('/new-whatsapp', (req: Request, res: Response) => {
     };
 
     server.io.emit('nuevo-whatsapp', payload )
+    server.io.emit(payload['ticket'], {ok: true} )
 
     res.json( payload );
 

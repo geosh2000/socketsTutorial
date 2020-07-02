@@ -52,6 +52,8 @@ class Server {
             socket.mensaje(cliente, this.io);
             // Whatsapp
             socket.whatsapp(cliente, this.io);
+            // SetTicket
+            socket.activeTicket(cliente, this.io);
         });
     }
     start(callback) {
