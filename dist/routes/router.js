@@ -29,6 +29,8 @@ router.post('/mensajes/:id', (req, res) => {
     const cuerpo = req.body.cuerpo;
     const de = req.body.de;
     const id = req.params.id;
+    const server = server_1.default.instance;
+    server.io.in(id).emit('mensaje-privado', { de, cuerpo });
     res.json({
         ok: true,
         mensaje: 'POST - Todo esta bien ID!!',
