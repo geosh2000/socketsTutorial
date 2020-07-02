@@ -64,11 +64,13 @@ router.get('/usuarios/detalle', (req, res) => {
 });
 router.post('/new-whatsapp', (req, res) => {
     const ticket = req.body.ticket;
+    const data = req.body.data;
     const server = server_1.default.instance;
     const payload = {
         ok: true,
         mensaje: 'Nuevo Mensaje de Whatsapp',
-        ticket
+        ticket,
+        data
     };
     server.io.emit('nuevo-whatsapp', payload);
     res.json(payload);
