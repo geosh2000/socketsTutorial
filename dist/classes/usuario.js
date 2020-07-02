@@ -6,6 +6,7 @@ class Usuario {
         this.id = id;
         this.nombre = 'Unknown';
         this.activeTicket = 'Unknown';
+        this.urlRef = 'Unknown';
         this.sala = 'Unknown';
     }
 }

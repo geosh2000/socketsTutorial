@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activeTicket = exports.login = exports.whatsapp = exports.mensaje = exports.desconectar = exports.conectarCliente = exports.usuariosConectdos = void 0;
+exports.urlRef = exports.activeTicket = exports.login = exports.whatsapp = exports.mensaje = exports.desconectar = exports.conectarCliente = exports.usuariosConectdos = void 0;
 const usuarios_lista_1 = require("../classes/usuarios-lista");
 const usuario_1 = require("../classes/usuario");
 exports.usuariosConectdos = new usuarios_lista_1.UsuariosLista();
@@ -50,6 +50,18 @@ exports.activeTicket = (cliente, io) => {
         callback({
             ok: true,
             mensaje: `Usuario ${cliente.id} viendo ${payload.ticket}`
+        });
+        io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
+    });
+};
+// Configurar URL
+exports.urlRef = (cliente, io) => {
+    cliente.on('desde-url', (payload, callback) => {
+        exports.usuariosConectdos.actualizarActiveTicket(cliente.id, payload.url);
+        console.log('Usuario Configurado', exports.usuariosConectdos.getUsuario(cliente.id));
+        callback({
+            ok: true,
+            mensaje: `Usuario ${cliente.id} viendo desde ${payload.url}`
         });
         io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
     });

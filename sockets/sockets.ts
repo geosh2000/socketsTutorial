@@ -99,4 +99,24 @@ export const activeTicket = ( cliente: Socket, io: socketIO.Server ) => {
 
 }
 
+// Configurar URL
+export const urlRef = ( cliente: Socket, io: socketIO.Server ) => {
+
+    cliente.on('desde-url', ( payload: { url: any }, callback: Function ) => {
+
+        usuariosConectdos.actualizarActiveTicket( cliente.id, payload.url )
+
+        console.log( 'Usuario Configurado', usuariosConectdos.getUsuario( cliente.id ) );
+
+        callback({
+            ok: true,
+            mensaje: `Usuario ${ cliente.id } viendo desde ${ payload.url }` 
+        })
+
+        io.emit( 'usuarios-activos', usuariosConectdos.getLista() );
+
+    });
+
+}
+
  

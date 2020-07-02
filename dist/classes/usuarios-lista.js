@@ -19,6 +19,15 @@ class UsuariosLista {
         }
         console.log('====== Actualizando Usuario ======');
     }
+    actualizarUrl(id, url) {
+        for (let usuario of this.lista) {
+            if (usuario.id === id) {
+                usuario.urlRef = url;
+                break;
+            }
+        }
+        console.log('====== Actualizando Usuario (URL) ======');
+    }
     actualizarActiveTicket(id, ticket) {
         for (let usuario of this.lista) {
             if (usuario.id === id) {

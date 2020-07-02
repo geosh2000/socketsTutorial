@@ -33,6 +33,21 @@ export class UsuariosLista {
 
     }
 
+    public actualizarUrl( id: string, url: string ) {
+        
+        for( let usuario of this.lista ){
+
+            if( usuario.id === id ){
+                usuario.urlRef = url;
+                break;
+            }
+
+        }
+
+        console.log('====== Actualizando Usuario (URL) ======');
+
+    }
+
     public actualizarActiveTicket( id: string, ticket: string ) {
         
         for( let usuario of this.lista ){
