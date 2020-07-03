@@ -104,7 +104,7 @@ export const urlRef = ( cliente: Socket, io: socketIO.Server ) => {
 
     cliente.on('desde-url', ( payload: { url: any }, callback: Function ) => {
 
-        usuariosConectdos.actualizarActiveTicket( cliente.id, payload.url )
+        usuariosConectdos.actualizarUrl( cliente.id, payload.url )
 
         console.log( 'Usuario Configurado', usuariosConectdos.getUsuario( cliente.id ) );
 

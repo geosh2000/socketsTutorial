@@ -57,7 +57,7 @@ exports.activeTicket = (cliente, io) => {
 // Configurar URL
 exports.urlRef = (cliente, io) => {
     cliente.on('desde-url', (payload, callback) => {
-        exports.usuariosConectdos.actualizarActiveTicket(cliente.id, payload.url);
+        exports.usuariosConectdos.actualizarUrl(cliente.id, payload.url);
         console.log('Usuario Configurado', exports.usuariosConectdos.getUsuario(cliente.id));
         callback({
             ok: true,
