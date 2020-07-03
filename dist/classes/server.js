@@ -54,6 +54,8 @@ class Server {
             socket.whatsapp(cliente, this.io);
             // SetTicket
             socket.activeTicket(cliente, this.io);
+            // Set URL
+            socket.urlRef(cliente, this.io);
         });
     }
     start(callback) {

@@ -61,6 +61,9 @@ export default class Server {
                         
             // SetTicket
             socket.activeTicket( cliente, this.io );  
+                        
+            // Set URL
+            socket.urlRef( cliente, this.io );  
 
         }) 
 
