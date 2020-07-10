@@ -30,7 +30,7 @@ export const desconectar = ( cliente: Socket, io: socketIO.Server) => {
 
 }
 
-
+ 
 
 // Escuchar mensajes
 export const mensaje = ( cliente: Socket, io: socketIO.Server ) => {
