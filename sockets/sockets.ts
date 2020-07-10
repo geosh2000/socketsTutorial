@@ -119,4 +119,25 @@ export const urlRef = ( cliente: Socket, io: socketIO.Server ) => {
 
 }
 
+
+
+
+
+
+
+
+
+// ================================= RROBIN =================================
+
+// Conectar RRobin
+export const rRobinSt = ( cliente: Socket, io: socketIO.Server ) => {
+
+    cliente.on('rrobin-status', ( payload: { zdId: any, st: boolean } ) => {
+
+        io.emit( payload.zdId, payload.st );
+
+    });
+
+}
+
  

@@ -64,6 +64,9 @@ export default class Server {
                         
             // Set URL
             socket.urlRef( cliente, this.io );  
+                        
+            // Set RRobin
+            socket.rRobinSt( cliente, this.io );  
 
         }) 
 
