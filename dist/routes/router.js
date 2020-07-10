@@ -62,6 +62,22 @@ router.get('/usuarios/detalle', (req, res) => {
         clientes: sockets_1.usuariosConectdos.getLista()
     });
 });
+router.get('/rrobin/login/:zdid', (req, res) => {
+    const zdid = req.params.zdid;
+    const server = server_1.default.instance;
+    server.io.emit(zdid, true);
+    res.json({
+        ok: true
+    });
+});
+router.get('/rrobin/logout/:zdid', (req, res) => {
+    const zdid = req.params.zdid;
+    const server = server_1.default.instance;
+    server.io.emit(zdid, false);
+    res.json({
+        ok: true
+    });
+});
 router.post('/new-whatsapp', (req, res) => {
     const ticket = req.body.ticket;
     const data = req.body.data;

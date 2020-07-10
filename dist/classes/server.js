@@ -56,6 +56,8 @@ class Server {
             socket.activeTicket(cliente, this.io);
             // Set URL
             socket.urlRef(cliente, this.io);
+            // Set RRobin
+            socket.rRobinSt(cliente, this.io);
         });
     }
     start(callback) {

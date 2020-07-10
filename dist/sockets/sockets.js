@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.urlRef = exports.activeTicket = exports.login = exports.whatsapp = exports.mensaje = exports.desconectar = exports.conectarCliente = exports.usuariosConectdos = void 0;
+exports.rRobinSt = exports.urlRef = exports.activeTicket = exports.login = exports.whatsapp = exports.mensaje = exports.desconectar = exports.conectarCliente = exports.usuariosConectdos = void 0;
 const usuarios_lista_1 = require("../classes/usuarios-lista");
 const usuario_1 = require("../classes/usuario");
 exports.usuariosConectdos = new usuarios_lista_1.UsuariosLista();
@@ -64,5 +64,12 @@ exports.urlRef = (cliente, io) => {
             mensaje: `Usuario ${cliente.id} viendo desde ${payload.url}`
         });
         io.emit('usuarios-activos', exports.usuariosConectdos.getLista());
+    });
+};
+// ================================= RROBIN =================================
+// Conectar RRobin
+exports.rRobinSt = (cliente, io) => {
+    cliente.on('rrobin-status', (payload) => {
+        io.emit(payload.zdId, payload.st);
     });
 };
