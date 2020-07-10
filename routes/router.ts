@@ -93,6 +93,32 @@ router.get('/usuarios/detalle', (req: Request, res: Response) => {
 
 })
 
+router.get('/rrobin/login/:zdid', (req: Request, res: Response) => {
+
+    const zdid = req.params.zdid;
+    const server = Server.instance;
+
+    server.io.emit( zdid, true );
+
+    res.json({
+        ok: true
+    });
+
+})
+
+router.get('/rrobin/logout/:zdid', (req: Request, res: Response) => {
+
+    const zdid = req.params.zdid;
+    const server = Server.instance;
+
+    server.io.emit( zdid, false );
+
+    res.json({
+        ok: true
+    });
+
+})
+
 
 router.post('/new-whatsapp', (req: Request, res: Response) => {
 
